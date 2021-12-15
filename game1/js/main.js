@@ -6,9 +6,9 @@ function start() {
     //This sintaxe is only possible because we're using jquery
     $('#start').hide()
         //Using append command we create a new div inside gameBackground
-    $('#gameBackground').append("<div id='jogador'></div>")
-    $('#gameBackground').append("<div id='inimigo1'></div>")
+    $('#gameBackground').append("<div id='jogador' class='anima1'></div>")
+    $('#gameBackground').append("<div id='inimigo1' class='anima2'></div>")
     $('#gameBackground').append("<div id='inimigo2'></div>")
-    $('#gameBackground').append("<div id='amigo'></div>")
+    $('#gameBackground').append("<div id='amigo' class='anima3'></div>")
 }
 //end of function start
