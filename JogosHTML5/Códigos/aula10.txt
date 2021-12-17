@@ -10,7 +10,7 @@
 
 ***** js.js ****
 
-	//Verifica se o usuário pressionou alguma tecla	
+	//Verifica se o usuï¿½rio pressionou alguma tecla	
 	
 	$(document).keydown(function(e){
 	jogo.pressionou[e.which] = true;
@@ -44,7 +44,7 @@
 	
 	if (jogo.pressionou[TECLA.D]) {
 		
-		//Chama função Disparo	
+		//Chama funï¿½ï¿½o Disparo	
 	}
 
-	} // fim da função movejogador()
+	} // fim da funï¿½ï¿½o movejogador()
