@@ -54,8 +54,8 @@ function start() {
     function movebackground() {
         left = parseInt($('#gameBackground').css('background-position'))
             /*Here we're taking the current value of the background-position 
-                                                    set in the css file to the div gameBackground that's
-                                                    why we need parseInt because it turns string into whole numbers */
+                                                                                            set in the css file to the div gameBackground that's
+                                                                                            why we need parseInt because it turns string into whole numbers */
             //By default the initial position is 0. Here we're updating its current position.
             // left (0) -1 means that the bg will move 1px to the left
         $('#gameBackground').css('background-position', left - 1)
@@ -69,11 +69,19 @@ function start() {
                 //Taking the css value of the top div. For example, if this div has value of 20 then the var top will value 20
             $('#player').css('top', topo - 10) //Here we update the same player div in the to property with the value of 20 - 10
                 //So the nave will rise 10 unites up
+                //The bellow prevents the helicopter to go beyond the top limit of the div
+            if (topo <= 0) {
+                $('#player').css('top', topo + 10)
+            }
         }
 
         if (game.pressed[KEY.S]) {
             const topo = parseInt($('#player').css('top'))
             $('#player').css('top', topo + 10)
+                //The bellow prevents the helicopter to go beyond the bottom limit of the div
+            if (topo >= 434) {
+                $('#player').css('top', topo - 10)
+            }
         }
 
         // if (game.pressed[KEY.D]) {
