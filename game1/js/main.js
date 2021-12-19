@@ -5,7 +5,8 @@ function start() {
 
     //This sintaxe is only possible because we're using jquery
     //hide is a jquery comand
-    $('#start' /*That's the div created in hte html file */ ).hide()
+    /*The #start bellow is the div created in hte html file */
+    $('#start').hide()
         //Using append command we create a new div inside gameBackground
         //"Create the div "player" which has the class"anima1" inside the div "gameBackground", etc
     $('#gameBackground').append("<div id='player' class='anima1'></div>")
@@ -17,6 +18,10 @@ function start() {
 
     //MAIN VARS OF THE GAME
     const game = {}
+    const velocity = 5
+        //The math.random makes the helicopter shows up in a different place in the Y position at a time
+    const positionY = parseInt(Math.random() * 334) //This function finds a randomly value between 0 and 334
+        //So the enemy1 will be postion between these values
     const KEY = {
         //In this var we create some definitions
         W: 87,
@@ -45,6 +50,7 @@ function start() {
     function loop() {
         movebackground()
         moveplayer()
+        moveenemy1()
     }
 
     //This function moves the background of the game
@@ -53,9 +59,9 @@ function start() {
     //parseInt coverts a string in a entire number
     function movebackground() {
         left = parseInt($('#gameBackground').css('background-position'))
-            /*Here we're taking the current value of the background-position 
-                                                                                            set in the css file to the div gameBackground that's
-                                                                                            why we need parseInt because it turns string into whole numbers */
+            //Here we're taking the current value of the background-position
+            //set in the css file to the div gameBackground that's
+            //why we need parseInt because it turns string into whole numbers
             //By default the initial position is 0. Here we're updating its current position.
             // left (0) -1 means that the bg will move 1px to the left
         $('#gameBackground').css('background-position', left - 1)
@@ -87,6 +93,18 @@ function start() {
         // if (game.pressed[KEY.D]) {
         //     //Chama fun��o Disparo
         // }
+    }
+
+    function moveenemy1() {
+        const positionX = parseInt($('#enemy1').css('left'))
+        $('#enemy1').css('left', positionX - velocity)
+        $('#enemy1').css('top', positionY)
+
+        if (positionX <= 0) {
+            positionY = parseInt(Math.random() * 334)
+            $('#enemy1').css('left', 694)
+            $('#enemy1').css('top', positionY)
+        }
     }
 }
 //end of function start
