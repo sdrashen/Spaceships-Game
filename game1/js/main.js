@@ -52,6 +52,7 @@ function start() {
         movebackground()
         moveplayer()
         moveenemy1()
+        moveenemy2()
     }
 
     //This function moves the background of the game
@@ -105,6 +106,22 @@ function start() {
             positionY = parseInt(Math.random() * 334)
             $('#enemy1').css('left', 694)
             $('#enemy1').css('top', positionY)
+        }
+    }
+
+    function moveenemy2() {
+        //This function creates a var which takes the "left" property of "enemy2" div(the truck)
+        //then it takes the enemy2div and subtracts postionX-3 which makes the objects move
+        //3 unities to the left.
+
+        positionX = parseInt($('#enemy2').css('left'))
+        $('#enemy2').css('left', positionX - 3)
+            //When the var positionX has value minor/equals 0 it will be repositioned
+            //in the right side of the div.
+            //Notice that the truck moves slower than the enemy1, it's because the truck has
+            // positionX - 3 and the enemy2 has velocity = 5.
+        if (positionX <= 0) {
+            $('#enemy2').css('left', 775)
         }
     }
 }
