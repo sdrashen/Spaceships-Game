@@ -55,6 +55,7 @@ function start() {
         moveenemy1()
         moveenemy2()
         movefriend()
+        collision()
     }
 
     //This function moves the background of the game
@@ -173,6 +174,14 @@ function start() {
                 canShoot = true
             }
         } // Fecha executaDisparo()
+    }
+
+    function collision() {
+        //collision is a function of the framework jquery collision. It will identify the collision between the div player (black helicopter) and enemy1(yellow helicopter)
+        var collision1 = $('#player').collision($('#enemy1'))
+            //When happens a collision this var receives a bunch of informations
+
+        console.log(collision1)
     }
 }
 //end of function start
