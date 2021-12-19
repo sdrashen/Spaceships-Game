@@ -31,7 +31,8 @@ body {
     border-style: solid;
 }
 
-#jogador {
+#player {
+    /*BLACK HELICOPTER*/
     width: 256px;
     height: 66px;
     position: absolute;
@@ -40,16 +41,17 @@ body {
     background-image: url(../imgs/apache.png);
 }
 
-#inimigo1 {
+#enemy1 {
     width: 256px;
     height: 66px;
     position: absolute;
     left: 689px;
     top: 253px;
-    background-image: url(../imgs/inimigo1.png);
+    /* background-image: url(../imgs/inimigo1.png); */
 }
 
-#inimigo2 {
+#enemy2 {
+    /*THE CAR*/
     width: 165px;
     height: 70px;
     position: absolute;
@@ -58,13 +60,14 @@ body {
     background-image: url(../imgs/inimigo2.png);
 }
 
-#amigo {
+#friend {
+    /*THE GUY*/
     width: 44px;
     height: 51px;
     position: absolute;
     left: 10px;
     top: 464px;
-    background-image: url(../imgs/amigo.png);
+    /* background-image: url(../imgs/amigo.png); */
 }
 
 #start {
@@ -82,7 +85,7 @@ body {
 /*ANIMATIONS*/
 
 .anima1 {
-    background-image: url(../imgs/helicoptero.png);
+    /* background-image: url(../imgs/helicoptero.png); */
     animation: play 0.5s steps(2) infinite;
     /*step(2) says how many frames the animation have.*/
     /*webkit to google*/
