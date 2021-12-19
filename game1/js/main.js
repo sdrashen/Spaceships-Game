@@ -53,6 +53,7 @@ function start() {
         moveplayer()
         moveenemy1()
         moveenemy2()
+        movefriend()
     }
 
     //This function moves the background of the game
@@ -122,6 +123,15 @@ function start() {
             // positionX - 3 and the enemy2 has velocity = 5.
         if (positionX <= 0) {
             $('#enemy2').css('left', 775)
+        }
+    }
+
+    function movefriend() {
+        positionX = parseInt($('#friend').css('left'))
+        $('#friend').css('left', positionX + 1)
+
+        if (positionX > 906) {
+            $('#friend').css('left', 0)
         }
     }
 }
