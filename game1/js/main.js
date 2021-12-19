@@ -18,9 +18,10 @@ function start() {
 
     //MAIN VARS OF THE GAME
     const game = {}
-    const velocity = 5
+        //For the enemy1 to move as we wish we have to use let instead of const
+    let velocity = 5
         //The math.random makes the helicopter shows up in a different place in the Y position at a time
-    const positionY = parseInt(Math.random() * 334) //This function finds a randomly value between 0 and 334
+    let positionY = parseInt(Math.random() * 334) //This function finds a randomly value between 0 and 334
         //So the enemy1 will be postion between these values
     const KEY = {
         //In this var we create some definitions
@@ -96,7 +97,7 @@ function start() {
     }
 
     function moveenemy1() {
-        const positionX = parseInt($('#enemy1').css('left'))
+        positionX = parseInt($('#enemy1').css('left'))
         $('#enemy1').css('left', positionX - velocity)
         $('#enemy1').css('top', positionY)
 
