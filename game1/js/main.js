@@ -17,6 +17,7 @@ function start() {
         //Their postion are already set in the css file
 
     //MAIN VARS OF THE GAME
+    let canShoot = true
     const game = {}
         //For the enemy1 to move as we wish we have to use let instead of const
     let velocity = 5
@@ -92,10 +93,10 @@ function start() {
                 $('#player').css('top', topo - 10)
             }
         }
-
-        // if (game.pressed[KEY.D]) {
-        //     //Chama fun��o Disparo
-        // }
+        //Calling the function shoot
+        if (game.pressed[KEY.D]) {
+            shot()
+        }
     }
 
     function moveenemy1() {
@@ -133,6 +134,45 @@ function start() {
         if (positionX > 906) {
             $('#friend').css('left', 0)
         }
+    }
+
+    function shot() {
+        //We start by checking if the var canShoot equals true, so all the following code will work
+        if (canShoot == true) {
+            //Here we change the var value to false so the player won't be able to shot again
+            //while the code bellow is not executed.
+            canShoot = false
+
+            topo = parseInt($('#player').css('top')) //Here we indicate the inital position of the shot which
+                //must be right in front of player, the black helicopter
+            positionX = parseInt($('#player').css('left'))
+            shotX = positionX + 190 //Move the shot to the right
+            topoShot = topo + 39 //Sets the exactly position of the shot: from the front of the player
+                //After setting the position of the shot, we create the div that has its content specified in the css file
+            $('#gameBackground').append("<div id='shot'></div")
+                //In the two code lines bellow we've positioned the div we just created
+            $('#shot').css('top', topoShot)
+            $('#shot').css('left', shotX)
+                //After postioning the div we've got to make it move
+                //Here I tried let and const but the only one that makes it work is var
+            var timeShot = window.setInterval(executeShot, 30)
+        }
+
+        function executeShot() {
+            //Here we take the current position of the shot, when it appears on the screen and
+            //make it move 15 unities, this definies the velocity of the shot
+            positionX = parseInt($('#shot').css('left'))
+            $('#shot').css('left', positionX + 15)
+                //After making the div move through the background we have to delete it from the screen, so
+            if (positionX > 900) {
+                window.clearInterval(timeShot)
+                    //On some browsers you have to indicate that the var is null otherwise the Interval won't be cancelled
+                timeShot = null
+                    //Here we remove the shot from the screen and allow the player to shoot again
+                $('#shot').remove()
+                canShoot = true
+            }
+        } // Fecha executaDisparo()
     }
 }
 //end of function start

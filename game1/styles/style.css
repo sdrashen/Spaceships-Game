@@ -210,3 +210,13 @@ body {
         background-position: -528px;
     }
 }
+
+#shot {
+    /*Initial configs of this div*/
+    width: 50px;
+    /*The width has same size as the background-image*/
+    height: 8px;
+    position: absolute;
+    /*position absolute will make this div be independent of the background*/
+    background-image: url(../imgs/disparo.png);
+}
