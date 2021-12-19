@@ -4,20 +4,24 @@ function start() {
     //When function start be called, the start div will be hidden and the 4 divs (jogar, inimigo1, inimigo2 and amigo) will be created
 
     //This sintaxe is only possible because we're using jquery
-    $('#start').hide()
+    //hide is a jquery comand
+    $('#start' /*That's the div created in hte html file */ ).hide()
         //Using append command we create a new div inside gameBackground
+        //"Create the div "player" which has the class"anima1" inside the div "gameBackground", etc
     $('#gameBackground').append("<div id='player' class='anima1'></div>")
     $('#gameBackground').append("<div id='enemy1' class='anima2'></div>")
     $('#gameBackground').append("<div id='enemy2'></div>")
     $('#gameBackground').append("<div id='friend' class='anima3'></div>")
+        //All these divs are created after the click that makes the div start be hidden
+        //Their postion are already set in the css file
 
-    //Main vars of the game
+    //MAIN VARS OF THE GAME
     const game = {}
     const KEY = {
         //In this var we create some definitions
-        W: 13,
-        S: 01,
-        D: 02
+        W: 87,
+        S: 83,
+        D: 68
     }
 
     game.pressed = [] //This is a var type array
@@ -49,6 +53,9 @@ function start() {
     //parseInt coverts a string in a entire number
     function movebackground() {
         left = parseInt($('#gameBackground').css('background-position'))
+            /*Here we're taking the current value of the background-position 
+                                                    set in the css file to the div gameBackground that's
+                                                    why we need parseInt because it turns string into whole numbers */
             //By default the initial position is 0. Here we're updating its current position.
             // left (0) -1 means that the bg will move 1px to the left
         $('#gameBackground').css('background-position', left - 1)
