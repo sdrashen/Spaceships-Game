@@ -14,6 +14,7 @@ function start() {
     $('#gameBackground').append("<div id='enemy2'></div>")
     $('#gameBackground').append("<div id='friend' class='anima3'></div>")
     $('#gameBackground').append("<div id='score'></div>")
+    $('#gameBackground').append("<div id='energy'></div>")
         //All these divs are created after the click that makes the div start be hidden
         //Their postion are already set in the css file
 
@@ -36,6 +37,7 @@ function start() {
     let points = 0
     let saveds = 0
     let losts = 0
+    let = currentEnergy = 3
 
     game.pressed = [] //This is a var type array
 
@@ -63,6 +65,7 @@ function start() {
         movefriend()
         collision()
         score()
+        energy()
     }
 
     //This function moves the background of the game
@@ -194,6 +197,7 @@ function start() {
             //When happens a collision this var receives a bunch of informations
             //The cod lines bellow identifies if the div is filled or not
         if (collision1.length > 0) {
+            currentEnergy--
             /*If it happens the div is filled*/
             //The two vars bellow captured the current position of the enemy
             enemy1X = parseInt($('#enemy1').css('left'))
@@ -208,6 +212,7 @@ function start() {
         }
 
         if (collision2.length > 0) {
+            currentEnergy--
             enemy2X = parseInt($('#enemy2').css('left'))
             enemy2Y = parseInt($('#enemy2').css('top'))
             explosion2(enemy2X, enemy2Y)
@@ -348,6 +353,26 @@ function start() {
             losts +
             '</h2>'
         )
+    }
+
+    function energy() {
+        if (currentEnergy == 3) {
+            $('#energy').css('background-image', 'url(imgs/energia3.png)')
+        }
+
+        if (currentEnergy == 2) {
+            $('#energy').css('background-image', 'url(imgs/energia2.png)')
+        }
+
+        if (currentEnergy == 1) {
+            $('#energy').css('background-image', 'url(imgs/energia1.png)')
+        }
+
+        if (currentEnergy == 0) {
+            $('#energy').css('background-image', 'url(imgs/energia0.png)')
+
+            //Game Over
+        }
     }
 }
 //end of function start
