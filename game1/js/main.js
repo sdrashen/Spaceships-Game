@@ -223,8 +223,10 @@ function start() {
         }
 
         //Here we are reusing explosion1
+        //Shot against enemy1
         if (collision3.length > 0) {
             points = points + 100
+            velocity = velocity + 0.3
             enemy1X = parseInt($('#enemy1').css('left'))
             enemy1Y = parseInt($('#enemy1').css('top'))
                 //Repositioning the shot
