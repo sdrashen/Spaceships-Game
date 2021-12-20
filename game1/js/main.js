@@ -236,10 +236,19 @@ function start() {
 
             reposicionEnemy2()
         }
-
+        //player x friend
         if (collision5.length > 0) {
             reposicionFriend()
             $('#friend').remove()
+        }
+        //enemy2 x friend
+        if (collision6.length > 0) {
+            friendX = parseInt($('#friend').css('left'))
+            friendY = parseInt($('#friend').css('top'))
+            explosion3(friendX, friendY)
+            $('#friend').remove()
+
+            reposicionFriend()
         }
     } //end of function collision
 
@@ -302,6 +311,20 @@ function start() {
             if (gameOver == false) {
                 $('#gameBackground').append("<div id='friend' class='anima3'></div>")
             }
+        }
+    }
+
+    function explosion3(friendX, friendY) {
+        //Creates a div class=anima4 in the background
+        $('#gameBackground').append("<div id='explosion3' class='anima4'></div>")
+        $('#explosion3').css('top', friendY)
+        $('#explosion3').css('left', friendX)
+        let timeExplosion3 = window.setInterval(resetExplosion3, 1000)
+
+        function resetExplosion3() {
+            $('#explosion3').remove()
+            window.clearInterval(timeExplosion3)
+            timeExplosion3 = null
         }
     }
 }
