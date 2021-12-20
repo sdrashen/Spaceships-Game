@@ -13,12 +13,14 @@ function start() {
     $('#gameBackground').append("<div id='enemy1' class='anima2'></div>")
     $('#gameBackground').append("<div id='enemy2'></div>")
     $('#gameBackground').append("<div id='friend' class='anima3'></div>")
+    $('#gameBackground').append("<div id='score'></div>")
         //All these divs are created after the click that makes the div start be hidden
         //Their postion are already set in the css file
 
     //MAIN VARS OF THE GAME
     let gameOver = false
     let canShoot = true
+
     const game = {}
         //For the enemy1 to move as we wish we have to use let instead of const
     let velocity = 5
@@ -31,6 +33,9 @@ function start() {
         S: 83,
         D: 68
     }
+    let points = 0
+    let saveds = 0
+    let losts = 0
 
     game.pressed = [] //This is a var type array
 
@@ -57,6 +62,7 @@ function start() {
         moveenemy2()
         movefriend()
         collision()
+        score()
     }
 
     //This function moves the background of the game
@@ -213,6 +219,7 @@ function start() {
 
         //Here we are reusing explosion1
         if (collision3.length > 0) {
+            points = points + 100
             enemy1X = parseInt($('#enemy1').css('left'))
             enemy1Y = parseInt($('#enemy1').css('top'))
                 //Repositioning the shot
@@ -225,8 +232,9 @@ function start() {
             $('#enemy1').css('left', 694)
             $('#enemy1').css('top', posicionY)
         }
-
+        //Shot against enemy2
         if (collision4.length > 0) {
+            points = points + 50
             enemy2X = parseInt($('#enemy2').css('left'))
             enemy2Y = parseInt($('#enemy2').css('top'))
             $('#enemy2').remove()
@@ -238,11 +246,13 @@ function start() {
         }
         //player x friend
         if (collision5.length > 0) {
+            saveds++
             reposicionFriend()
             $('#friend').remove()
         }
         //enemy2 x friend
         if (collision6.length > 0) {
+            losts++
             friendX = parseInt($('#friend').css('left'))
             friendY = parseInt($('#friend').css('top'))
             explosion3(friendX, friendY)
@@ -326,6 +336,18 @@ function start() {
             window.clearInterval(timeExplosion3)
             timeExplosion3 = null
         }
+    }
+    //As this function is inside gameloop, this ponctuation will always be updated in the div
+    function score() {
+        $('#score').html(
+            '<h2> Points: ' +
+            points +
+            ' Saveds: ' +
+            saveds +
+            ' Losts: ' +
+            losts +
+            '</h2>'
+        )
     }
 }
 //end of function start
