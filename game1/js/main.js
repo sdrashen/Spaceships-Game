@@ -38,8 +38,26 @@ function start() {
     let saveds = 0
     let losts = 0
     let = currentEnergy = 3
+        //We're using pure javascript for the sounds because of some incompatibilities there might be while using jquery for this
 
     game.pressed = [] //This is a var type array
+        //GAME sounds
+    const shotSound = document.getElementById('shotSound')
+    const explosionSound = document.getElementById('explosionSound')
+    const music = document.getElementById('music')
+    const gameOverSound = document.getElementById('gameOverSound')
+    const lostSound = document.getElementById('lostSound')
+    const rescueSound = document.getElementById('rescueSound')
+        //Music in loop. We're adding a event to the music so it will be played over and over again
+    music.addEventListener(
+        'ended',
+        function() {
+            music.currentTime = 0
+            music.play()
+        },
+        false
+    )
+    music.play()
 
     // //The code bellow check if the player pressed a key. We do that by using keydown
 
@@ -152,6 +170,7 @@ function start() {
         if (canShoot == true) {
             //Here we change the var value to false so the player won't be able to shot again
             //while the code bellow is not executed.
+            shotSound.play()
             canShoot = false
 
             topo = parseInt($('#player').css('top')) //Here we indicate the inital position of the shot which
@@ -254,12 +273,14 @@ function start() {
         //player x friend
         if (collision5.length > 0) {
             saveds++
+            rescueSound.play()
             reposicionFriend()
             $('#friend').remove()
         }
         //enemy2 x friend
         if (collision6.length > 0) {
             losts++
+            rescueSound()
             friendX = parseInt($('#friend').css('left'))
             friendY = parseInt($('#friend').css('top'))
             explosion3(friendX, friendY)
@@ -270,6 +291,7 @@ function start() {
     } //end of function collision
 
     function explosion1(enemy1X, enemy1Y) {
+        explosionSound.play()
         $('#gameBackground').append("<div id='explosion1'></div")
         $('#explosion1').css('background-image', 'url(imgs/explosao.png)')
         const div = $('#explosion1') //This var was created to don't repeat all the lines above
@@ -289,6 +311,7 @@ function start() {
     }
     //The function bellow says that enemy2 will be bacl on screen after 5s
     function reposicionEnemy2() {
+        explosionSound.play()
         let timeCollision4 = window.setInterval(reposicion4, 5000)
 
         function reposicion4() {
@@ -332,7 +355,8 @@ function start() {
     }
 
     function explosion3(friendX, friendY) {
-        //Creates a div class=anima4 in the background
+        lostSound.play()
+            //Creates a div class=anima4 in the background
         $('#gameBackground').append("<div id='explosion3' class='anima4'></div>")
         $('#explosion3').css('top', friendY)
         $('#explosion3').css('left', friendX)
