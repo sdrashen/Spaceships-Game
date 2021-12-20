@@ -210,6 +210,32 @@ function start() {
                 //Here we make the enemy2 show up again (Because of mozila we can't create the code directly hee we have to call another function for that)
             reposicionEnemy2()
         }
+
+        //Here we are reusing explosion1
+        if (collision3.length > 0) {
+            enemy1X = parseInt($('#enemy1').css('left'))
+            enemy1Y = parseInt($('#enemy1').css('top'))
+                //Repositioning the shot
+                //In the function shot the value is 900
+                //We can't remove here because we need the function shot to be finalized
+            explosion1(enemy1X, enemy1Y)
+            $('#shot').css('left', 950)
+
+            posicionY = parseInt(Math.random() * 334)
+            $('#enemy1').css('left', 694)
+            $('#enemy1').css('top', posicionY)
+        }
+
+        if (collision4.length > 0) {
+            enemy2X = parseInt($('#enemy2').css('left'))
+            enemy2Y = parseInt($('#enemy2').css('top'))
+            $('#enemy2').remove()
+
+            explosion2(enemy2X, enemy2Y)
+            $('#shot').css('left', 950)
+
+            reposicionEnemy2()
+        }
     }
 
     function explosion1(enemy1X, enemy1Y) {
