@@ -178,10 +178,43 @@ function start() {
 
     function collision() {
         //collision is a function of the framework jquery collision. It will identify the collision between the div player (black helicopter) and enemy1(yellow helicopter)
-        var collision1 = $('#player').collision($('#enemy1'))
+        let collision1 = $('#player').collision($('#enemy1'))
             //When happens a collision this var receives a bunch of informations
+            //The cod lines bellow identifies if the div is filled or not
+        if (collision1.length > 0) {
+            /*If it happens the div is filled*/
+            //The two vars bellow captured the current position of the enemy
+            enemy1X = parseInt($('#enemy1').css('left'))
+            enemy1Y = parseInt($('#enemy1').css('top'))
+                //After we got the enemy's position we call function (explosion1) and we send by parameters the vars above so in the function we'll have those values to create the explosion
+            explosion1(enemy1X, enemy1Y)
+                //And so we will reposition enemy1 by creating a var called positionY that is going to have a random value between 0 and 334
 
-        console.log(collision1)
+            positionY = parseInt(Math.random() * 334)
+            $('#enemy1').css('left', 694) /*694 is the position on the right side */
+            $('#enemy1').css('top', positionY)
+        }
+    }
+
+    function explosion1(enemy1X, enemy1Y) {
+        $('#gameBackground').append("<div id='explosion1'></div")
+        $('#explosion1').css('background-image', 'url(imgs/explosao.png)')
+        const div = $('#explosion1') //This var was created to don't repeat all the lines above
+            //The lines above indicate the position where the explosion will show up
+        div.css('top', enemy1Y)
+        div.css('left', enemy1X)
+            //In the css file we have the initial properties of this div, here we have how it will behave
+        div.animate({ width: 200, opacity: 0 }, 'slow')
+
+        let timeExplosion = window.setInterval(removeExplosion, 1000)
+
+        function removeExplosion() {
+            div.remove()
+            window.clearInterval(timeExplosion)
+            timeExplosion = null
+        }
     }
 }
 //end of function start
+
+//Started creating the whole collision after inserting jquery collision

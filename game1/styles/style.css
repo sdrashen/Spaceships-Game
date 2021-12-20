@@ -220,3 +220,10 @@ body {
     /*position absolute will make this div be independent of the background*/
     background-image: url(../imgs/disparo.png);
 }
+
+#explosion1,
+#explosion2 {
+    width: 15px;
+    height: 87px;
+    position: absolute;
+}
