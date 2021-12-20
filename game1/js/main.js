@@ -17,6 +17,7 @@ function start() {
         //Their postion are already set in the css file
 
     //MAIN VARS OF THE GAME
+    let gameOver = false
     let canShoot = true
     const game = {}
         //For the enemy1 to move as we wish we have to use let instead of const
@@ -179,6 +180,11 @@ function start() {
     function collision() {
         //collision is a function of the framework jquery collision. It will identify the collision between the div player (black helicopter) and enemy1(yellow helicopter)
         let collision1 = $('#player').collision($('#enemy1'))
+        let collision2 = $('#player').collision($('#enemy2'))
+        let collision3 = $('#shot').collision($('#enemy1'))
+        let collision4 = $('#shot').collision($('#enemy2'))
+        let collision5 = $('#player').collision($('#friend'))
+        let collision6 = $('#enemy2').collision($('#friend'))
             //When happens a collision this var receives a bunch of informations
             //The cod lines bellow identifies if the div is filled or not
         if (collision1.length > 0) {
@@ -193,6 +199,16 @@ function start() {
             positionY = parseInt(Math.random() * 334)
             $('#enemy1').css('left', 694) /*694 is the position on the right side */
             $('#enemy1').css('top', positionY)
+        }
+
+        if (collision2.length > 0) {
+            enemy2X = parseInt($('#enemy2').css('left'))
+            enemy2Y = parseInt($('#enemy2').css('top'))
+            explosion2(enemy2X, enemy2Y)
+
+            $('#enemy2').remove()
+                //Here we make the enemy2 show up again (Because of mozila we can't create the code directly hee we have to call another function for that)
+            reposicionEnemy2()
         }
     }
 
@@ -214,7 +230,35 @@ function start() {
             timeExplosion = null
         }
     }
+    //The function bellow says that enemy2 will be bacl on screen after 5s
+    function reposicionEnemy2() {
+        let timeCollision4 = window.setInterval(reposicion4, 5000)
+
+        function reposicion4() {
+            window.clearInterval(timeCollision4)
+            timeCollision4 = null
+                //We need to stablish that it will only happen if the isn't over because otherwise there wouldn't be a reson for enemy2 to be back on teh screen
+            if (gameOver == false) {
+                $('#gameBackground').append('<div id=enemy2></div')
+            }
+        }
+    }
+
+    function explosion2(enemy2X, enemy2Y) {
+        $('#gameBackground').append("<div id='explosion2'></div")
+        $('#explosion2').css('background-image', 'url(imgs/explosao.png)')
+        let div2 = $('#explosion2')
+        div2.css('top', enemy2Y)
+        div2.css('left', enemy2X)
+        div2.animate({ width: 200, opacity: 0 }, 'slow')
+
+        let timeExplosion2 = window.setInterval(removeExplosion2, 1000)
+
+        function removeExplosion2() {
+            div2.remove()
+            window.clearInterval(timeExplosion2)
+            timeExplosion2 = null
+        }
+    }
 }
 //end of function start
-
-//Started creating the whole collision after inserting jquery collision
