@@ -380,7 +380,7 @@ function start() {
             '</h2>'
         )
     }
-
+    //The function bellow controls the energy of the player
     function energy() {
         if (currentEnergy == 3) {
             $('#energy').css('background-image', 'url(imgs/energia3.png)')
@@ -398,7 +398,32 @@ function start() {
             $('#energy').css('background-image', 'url(imgs/energia0.png)')
 
             //Game Over
+            endGame()
         }
+    }
+    //The gameOver function changes the value of the var gameOver to "true". It will, for example, avoid the repositionings to happen. It's main task is to stop the game loop
+    //Here I changed the name of the function from gameOver to endGame because I've already had created a var called gameOver
+    function endGame() {
+        endGame = true
+        music.pause()
+        gameOverSound.play()
+            //The code line belloew is the main line of this function because it stop the game loop
+        window.clearInterval(game.timer)
+        game.timer = null
+
+        $('#player').remove()
+        $('#enemy1').remove()
+        $('#enemy2').remove()
+        $('#friend').remove()
+
+        $('#gameBackground').append("<div id='end'></div>")
+
+        $('#end').html(
+            '<h1> Game Over </h1><p>Your score: ' +
+            points +
+            '</p>' +
+            "<div id='restart' onClick=restartGame()><h3>Play again</h3></div>"
+        )
     }
 }
 //end of function start
