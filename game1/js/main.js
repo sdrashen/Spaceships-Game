@@ -426,4 +426,10 @@ function start() {
         )
     }
 }
+
+function restartGame() {
+    gameOverSound.pause()
+    $('#end').remove()
+    start()
+}
 //end of function start
